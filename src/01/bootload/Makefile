@@ -39,23 +39,23 @@ LFLAGS = -static -T ld.scr -L.
 all :           $(TARGET)
 
 $(TARGET) :     $(OBJS)
-                $(CC) $(OBJS) -o $(TARGET) $(CFLAGS) $(LFLAGS)
-                cp $(TARGET) $(TARGET).elf
-                $(STRIP) $(TARGET)
+		$(CC) $(OBJS) -o $(TARGET) $(CFLAGS) $(LFLAGS)
+		cp $(TARGET) $(TARGET).elf
+		$(STRIP) $(TARGET)
 
 .c.o :          $<
-                $(CC) -c $(CFLAGS) $<
+		$(CC) -c $(CFLAGS) $<
 
 .s.o :          $<
-                $(CC) -c $(CFLAGS) $<
+		$(CC) -c $(CFLAGS) $<
 
 $(TARGET).mot : $(TARGET)
-                $(OBJCOPY) -O srec $(TARGET) $(TARGET).mot
+		$(OBJCOPY) -O srec $(TARGET) $(TARGET).mot
 
 image :         $(TARGET).mot
 
 write :         $(TARGET).mot
-                $(H8WRITE) -3069 -f20 $(TARGET).mot $(H8WRITE_SERDEV)
+		$(H8WRITE) -3069 -f20 $(TARGET).mot $(H8WRITE_SERDEV)
 
 clean :
-                rm -f $(OBJS) $(TARGET) $(TARGET).elf $(TARGET).mot
+		rm -f $(OBJS) $(TARGET) $(TARGET).elf $(TARGET).mot

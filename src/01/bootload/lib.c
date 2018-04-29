@@ -11,7 +11,7 @@ int putc(unsigned char c)
 }
 
 /* １文字送信  */
-int put(unsigned char *str);
+int puts(unsigned char *str)
 {
   while (*str)
     putc(*(str++));
